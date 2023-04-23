@@ -6,7 +6,7 @@ on:
       - 'main'
     paths:
       - 'base'
-      - '/.github/workflows/base.yml'
+      - '.github/workflows/base.yml'
 
 jobs:
   push_to_registry:
