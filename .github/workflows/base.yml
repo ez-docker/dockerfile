@@ -3,7 +3,7 @@ name: 基础镜像
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
     paths:
       - 'base'
 
