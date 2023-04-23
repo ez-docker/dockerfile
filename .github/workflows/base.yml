@@ -28,10 +28,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
           
       - name: 获取触发时间
-        run: echo "TRIGGER_TIME=$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')" >> $GITHUB_ENV
-        shell: bash
-        env:
-          TZ: :Asia/Shanghai
+        run: echo "TRIGGER_TIME=$(TZ=Asia/Shanghai date '+%Y%m%d%H%M')" >> $GITHUB_ENV
 
       - name: 构建镜像并推送到${{ env.REGISTRY }}镜像仓库
         uses: docker/build-push-action@v3
