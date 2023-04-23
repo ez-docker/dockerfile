@@ -39,5 +39,5 @@ jobs:
           # platforms: linux/amd64,linux/arm64,linux/arm/v7
           platforms: linux/amd64
           tags: |
-            eclairkk/dependent:${{ env.TRIGGER_TIME }}
-            eclairkk/dependent:latest
+            eclairkk/base:${{ env.TRIGGER_TIME }}
+            eclairkk/base:latest
