@@ -28,9 +28,10 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
           
       - name: 获取触发时间
-        id: trigger_time
-        run: echo "::set-output name=trigger_time::$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')"
-        # run: echo "TRIGGER_TIME=$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')" >> $GITHUB_ENV
+        run: echo "TRIGGER_TIME=$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')" >> $GITHUB_ENV
+        shell: bash
+        env:
+          TZ: :Asia/Shanghai
 
       - name: 构建镜像并推送到${{ env.REGISTRY }}镜像仓库
         uses: docker/build-push-action@v3
@@ -39,5 +40,5 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            eclairkk/base:${{ steps.trigger_time.outputs.trigger_time }}
+            eclairkk/base:${{ env.TRIGGER_TIME }}
             eclairkk/base:latest
