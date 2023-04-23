@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 检出当前代码
+      - name: 拉取代码
         uses: actions/checkout@v3
 
       - name: 登录到${{ env.REGISTRY }}镜像服务
@@ -27,17 +27,17 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
           
-      - name: 获取时间
-        run: echo "TRIGGER_TIME=$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')" >> $GITHUB_ENV
+      - name: 获取触发时间
+        id: 触发时间
+        run: echo "::set-output name=触发时间::$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')"
+        # run: echo "TRIGGER_TIME=$(TZ=':Asia/Shanghai' date '+%Y%m%d%H%M')" >> $GITHUB_ENV
 
       - name: 构建镜像并推送到${{ env.REGISTRY }}镜像仓库
-        id: docker_build
         uses: docker/build-push-action@v3
         with:
           context: ./base
           push: true
-          # platforms: linux/amd64,linux/arm64,linux/arm/v7
           platforms: linux/amd64
           tags: |
-            eclairkk/base:${{ env.TRIGGER_TIME }}
+            eclairkk/base:${{ steps.触发时间.outputs.触发时间 }}
             eclairkk/base:latest
