@@ -5,7 +5,7 @@ on:
     branches:
       - 'master'
     paths:
-      - 'dockerfile/dependent'
+      - 'base'
 
 jobs:
   push_to_registry:
