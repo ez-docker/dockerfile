@@ -18,3 +18,5 @@ RUN micromamba run pip install torch torchvision torchaudio --index-url https://
     micromamba run pip cache purge
 
 WORKDIR /sd
+
+# CMD ["python3", "launch.py", "--no-half", "--port", "1234", "--listen"]
