@@ -6,11 +6,15 @@ on:
       - 'main'
     paths:
       - 'base'
+      - '/.github/workflows/base.yml'
 
 jobs:
   push_to_registry:
     name: 编译 基础镜像 推送 DockerHub 
     runs-on: ubuntu-latest
+
+    env:
+      DOCKER_REGISTRY: docker.io
 
     steps:
       - name: 检出代码
@@ -21,7 +25,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
-          registry: docker.io
+          registry: ${{ env.DOCKER_REGISTRY }}
 
       - name: 设置 Buildx
         id: buildx
